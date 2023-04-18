@@ -2,6 +2,8 @@ import React from 'react'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import {TfiLayoutSlider} from 'react-icons/tfi'
+import {GiVideoConference} from 'react-icons/gi'
 
 import PeopleIcon from '@mui/icons-material/People';
 import {SlOrganization} from 'react-icons/sl'
@@ -44,6 +46,20 @@ const SideBar = ({open,presentLink}) => {
         active={presentLink === 'payment' ? true : false}
         handleClick={() => { navigate("/payment") }}
         Icon={PaymentsIcon}
+      />
+
+      <CustomList 
+        text={'Home Slider'} open={open} 
+        active={presentLink === 'slider' ? true : false}
+        handleClick={() => { navigate("/slider") }}
+        Icon={TfiLayoutSlider}
+      />
+
+      <CustomList 
+        text={'Home Seminar'} open={open} 
+        active={presentLink === 'seminar' ? true : false}
+        handleClick={() => { navigate("/seminar") }}
+        Icon={GiVideoConference}
       />
 
     </List>

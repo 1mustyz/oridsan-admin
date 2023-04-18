@@ -19,20 +19,27 @@ export const Text = ({text}) => {
       },
       
     },
+
+    borderBottom: {
+      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        borderBottom: "1px solid",
+      },
+      
+    },
     "& .MuiOutlinedInput-notchedOutline:hover": {
     },
   });
   
-export const Field = ({type, multiline, maxRows, width, conWidth='300px', size='small', ...props}) => {
+export const Field = ({type, multiline, maxRows, width, conWidth='300px',  variant="outlined", size='small', ...props}) => {
       const [field, meta] = useField(props)
    
       const classes = useStyles();
       return (
         <div className='flex flex-col gap-1'>
             <TextField id="outlined-basic" {...props} {...field} size={size} 
-                sx={{width: conWidth}}
+                sx={{width: conWidth,}}
                 type={type === undefined ? 'text': type} 
-                variant="outlined"   
+                variant={variant}   
                 inputProps={{style: {fontSize: 14, width: width !== undefined ? width : '300px',color: (meta.error) && (meta.touched) ? 'red': ''}}}
                 className={(meta.error) && (meta.touched) ? classes.root : ''}
                 multiline={multiline !== undefined ? multiline : false}

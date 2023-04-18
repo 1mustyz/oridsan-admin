@@ -1,0 +1,1 @@
+export const BASE_URI = 'https://quiet-moon-7712.fly.dev'
