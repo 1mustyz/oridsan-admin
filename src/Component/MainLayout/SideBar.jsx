@@ -4,6 +4,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import {TfiLayoutSlider} from 'react-icons/tfi'
 import {GiVideoConference} from 'react-icons/gi'
+import {TbCategory} from 'react-icons/tb'
 
 import PeopleIcon from '@mui/icons-material/People';
 import {SlOrganization} from 'react-icons/sl'
@@ -18,7 +19,7 @@ const SideBar = ({open,presentLink}) => {
       <CustomList 
         text={'Dashboard'} open={open} 
         active={presentLink === 'dashboard' ? true : false}
-        handleClick={() => { navigate("/") }}
+        handleClick={() => { navigate("/home") }}
       />
       <CustomList 
         text={'Add Staff'} open={open} 
@@ -60,6 +61,13 @@ const SideBar = ({open,presentLink}) => {
         active={presentLink === 'seminar' ? true : false}
         handleClick={() => { navigate("/seminar") }}
         Icon={GiVideoConference}
+      />
+
+      <CustomList 
+        text={'Membership Category'} open={open} 
+        active={presentLink === 'membership' ? true : false}
+        handleClick={() => { navigate("/category") }}
+        Icon={TbCategory}
       />
 
     </List>

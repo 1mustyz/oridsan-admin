@@ -8,11 +8,14 @@ import Payment from './Screens/Payment/Payment';
 import Slider from './Screens/Slider/Slider';
 import Seminars from './Screens/Seminars/Seminars';
 import Login from './Screens/Login/Login';
+import Category from './Screens/Category/Category';
+import AppToast from './Component/Toaster/AppToast'
 
 
 function App() {
   return (
     <div className="App">
+     <AppToast/>
      <BrowserRouter>
         <Routes>
           <Route path='/home' element={<HomePage/>} />
@@ -23,7 +26,7 @@ function App() {
           <Route path='/slider' element={<Slider/>} />
           <Route path='/seminar' element={<Seminars/>} />
           <Route path='/' element={<Login/>} />
-
+          <Route path='/category' element={<Category />} />
 
         
         </Routes>

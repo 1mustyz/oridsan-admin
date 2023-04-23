@@ -2,15 +2,10 @@ export class Storage {
 
     async AuthStorage(object) {
         await localStorage.setItem("authtoken", object.token);
-        await localStorage.setItem("user", JSON.stringify(object))
-        await localStorage.setItem("company", JSON.stringify(object));
+        await localStorage.setItem("user", JSON.stringify(object.user))
         return true;
     }
 
-    async SetCompany (object) {
-        await localStorage.setItem("company", JSON.stringify(object));
-        return true
-    }
 
     clearStorage() {
         localStorage.clearStorage();
@@ -23,20 +18,6 @@ export class Storage {
             return null;
     }
 
-
-    getCompany() {
-        if (localStorage.getItem("company") !== "undefined")
-            return JSON.parse(localStorage.getItem("company"));
-        else
-            return null;
-    }
-
-    getCompanies() {
-        if (localStorage.getItem("companies") !== "undefined")
-            return JSON.parse(localStorage.getItem("companies"));
-        else
-            return null;
-    }
 
     getConfig() {
         return {

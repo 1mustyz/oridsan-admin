@@ -20,7 +20,7 @@ export const createAccount = async (data) => {
 
 export const login = async (data) => {
   
-    const response = await axios.post(`${BASE_URI}/auth/login`, data, config);
+    const response = await axios.post(`${BASE_URI}/users/login`, data, config);
     return response.data;
   
 }  

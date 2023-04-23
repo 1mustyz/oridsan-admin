@@ -1,10 +1,47 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Formik } from 'formik'
+import { useNavigate } from 'react-router'
 
 import Logo from '../../Component/Logo'
 import {Text, TextAndField, Field, FillButton} from '../../Component/FormUtils/FormUtils' 
+import {login} from '../../Network/ServiceClass/Auth'
+import Error from '../../Component/Errors/Error'
+import { Storage } from '../../Network/StorageClass/StorageClass'
+import { loginSchema } from '../../Component/validationSchema'
 
+
+
+const storage = new Storage()
 const Login = () => {
+
+  const navigate = useNavigate()
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = (value) =>{
+    setIsLoading(true)
+
+    login(value).then(val => {
+
+      setIsLoading(false)
+      const data = {
+        user: val.data.data.personalDetails,
+        token: val.data.token
+      }
+
+      storage.AuthStorage(data)
+
+      navigate('/home')
+    }).catch(err => {
+      setIsLoading(false)
+      setErrorMsg(err.response.data.message)
+      setIsError(true)
+    })
+
+  }
+
   return (
     <div className='bg-[#DDDDDD] w-[100vw] h-[100vh] pt-[100px]'>
 
@@ -23,7 +60,9 @@ const Login = () => {
             initialValues={{
                 email: '',
                 password: ''
-            }}>
+            }}
+            validationSchema={loginSchema}
+            onSubmit={(value)=>handleSubmit(value)}>
                 {props => (
                   <div className='self-start flex flex-col gap-3'>
                     <TextAndField>
@@ -38,7 +77,11 @@ const Login = () => {
 
                     <p className='text-[12px]'>Forgot Password ? Reset it</p>
 
-                    <FillButton text={'Sign in'} width={'200px'}/>
+                    <div className='flex gap-3'>
+
+                      <FillButton isLoading={isLoading} text={'Sign in'} width={'200px'} callBack={props.handleSubmit}/>
+                      <div className='w-[200px]'>{isError && <Error message={errorMsg} handleClick={()=> {setIsError(false)}}/>}</div>
+                    </div>
                   </div>
                 )}
 

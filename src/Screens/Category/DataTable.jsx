@@ -11,29 +11,19 @@ import { useDispatch,useSelector } from 'react-redux';
 
 
 import {CustomIconButton} from '../../Component/FormUtils/FormUtils'
-import {getConferencesThunk} from '../../Store/conference'
+import { getMembershipsThunk } from '../../Store/membership';
 import AppLoader from '../../Component/AppLoader';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0,),
-  createData('Ice cream sandwich', 237, 9.0,),
-  createData('Eclair', 262, 16.0,),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0,),
-];
 
 export const DataTable = () => {
   const dispatch = useDispatch()
-  const store = useSelector((state) => state.conference);
+  const store = useSelector((state) => state.membership);
 
 
   useEffect(()=>{
-    dispatch(getConferencesThunk())
-  },[dispatch])
+    dispatch(getMembershipsThunk())
+  },[])
    
   return (
     <TableContainer className='h-[70vh] bg-[white] overflow-y-auto'>
@@ -43,18 +33,15 @@ export const DataTable = () => {
           <TableHead className='sticky top-0 bg-[white] z-[1000]'>
             <TableRow>
               <TableCellWithBorder text={'S/N'}/>
-              <TableCellWithBorder text={'Title'}/>
+              <TableCellWithBorder text={'Membership'}/>
               <TableCellWithBorder text={'Desc'}/>
-              <TableCellWithBorder text={'Location'}/>
-              <TableCellWithBorder text={'Amount'}/>
-              <TableCellWithBorder text={'Scheduled Date'}/>
-              <TableCellWithBorder text={'Scheduled Time'}/>
+              <TableCellWithBorder text={'Price'}/>
+             
               <TableCellWithBorder text={'Action'}/>
             </TableRow>
           </TableHead>
           <TableBody>
-            {store?.conferences?.map((row,index) => {
-              const date = new Date("2023-05-21T23:00:00.000Z").toLocaleDateString() 
+            {store?.memberships?.map((row,index) => {
               return <TableRow
                 key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -62,13 +49,10 @@ export const DataTable = () => {
                 <TableCellWithBorder text={index + 1}/>
 
                 <TableCell className='border-1 border-border-color' component="th" scope="row">
-                  {row.title}
+                  {row.membershipCat}
                 </TableCell>
                 <TableCellWithBorder text={row.description}/>
-                <TableCellWithBorder text={row.venue}/>
-                <TableCellWithBorder text={row.cost}/>
-                <TableCellWithBorder text={date}/>
-                <TableCellWithBorder text={row.time}/>
+                <TableCellWithBorder text={row.price}/>
 
                 <TableCell className='border-1 w-[155px] border-border-color' component="th" scope="row">
                   <CustomIconButton Icon={FaRegEdit}/>
