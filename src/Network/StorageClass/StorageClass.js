@@ -23,7 +23,7 @@ export class Storage {
         return {
             headers: {
                 "content-type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("authtoken")}`
+                "x-auth-token": `${localStorage.getItem("authtoken")}`
             },
         };
     }
@@ -33,7 +33,7 @@ export class Storage {
             headers: {
                 "Content-Type": "multipart/form-data",
                 'Accept': 'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("authtoken")}`,
+                "x-auth-token": `${localStorage.getItem("authtoken")}`,
             },
         }
     }

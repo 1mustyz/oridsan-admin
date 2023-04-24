@@ -6,25 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {FaRegEdit} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
-
 
 import {CustomIconButton} from '../../Component/FormUtils/FormUtils'
 import { getSlidersThunk } from '../../Store/slider';
 import AppLoader from '../../Component/AppLoader';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0,),
-  createData('Ice cream sandwich', 237, 9.0,),
-  createData('Eclair', 262, 16.0,),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0,),
-];
 
 export const DataTable = () => {
   const dispatch = useDispatch()
@@ -49,23 +35,23 @@ export const DataTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row,index) => (
+            {store.sliders.map((row,index) => (
               <TableRow
-                key={row.name}
+                key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCellWithBorder text={index + 1}/>
 
                 <TableCell className='border-1 border-border-color' component="th" scope="row">
-                  {row.name}
+                  {row.title}
                 </TableCell>
-                <TableCellWithBorder text={row.calories}/>
-                <TableCellWithBorder text={row.fat}/>
+                <TableCellWithBorder text={row.description}/>
+                <TableCell className='border-1 border-border-color' component="th" scope="row">
+                  <a href={row.photo.secureUrl} target="_blank">Click to view photo</a>
+                </TableCell>
                 
-                <TableCell className='border-1 w-[155px] border-border-color' component="th" scope="row">
-                  <CustomIconButton Icon={FaRegEdit}/>
+                <TableCell className='border-1 border-border-color' component="th" scope="row">
                   <CustomIconButton iconStyle={'text-[red]'} Icon={DeleteIcon}/>
-
                 </TableCell>
                 
               </TableRow>

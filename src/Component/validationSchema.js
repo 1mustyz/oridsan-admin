@@ -25,3 +25,23 @@ export  const seminarSchema = Yup.object().shape({
     description: Yup.string().required("Description is required"),
     title: Yup.string().required("Title is required"),
   })
+
+  export  const chapterSchema = Yup.object().shape({
+    chapterName: Yup.string().required("Chapter Name is required"),
+    address: Yup.string().required("Address is required"),
+    contact: Yup.string().required("Contact is required"),
+
+  })
+
+  export  const staffSchema = Yup.object().shape({
+    firstName: Yup.string().min(3).required("First Name is required"),
+    lastName: Yup.string().min(3).required("Last Name is required"),
+    email: Yup.string().email().required("Email is required"),
+    role: Yup.string().required("Role is required"),
+    password: Yup.string().min(6).required("Password is required"),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm password is required'),
+
+
+  })

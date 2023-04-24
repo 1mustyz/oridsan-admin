@@ -55,8 +55,13 @@ const Slider = () => {
         if(photo === null){
             setIsError(true)
             setErrMsg('You have to select an image')
+        }else{
+            dispatch(createSliderThunk(data))
+            .then(()=>{
+                actions.resetForm()
+                toast.success('Home slider created')
+            })
         }
-        console.log(data)
     }
   return (
     <MainLayout presentLink={'slider'}>
@@ -95,7 +100,7 @@ const Slider = () => {
                                 </div>
                                 <Field size='small' multiline={true} maxRows={4} conWidth='940px' name='description' placeholder='Description'/>
                                 <div className='flex gap-2'>
-                                    <FillButton width={'150px'} text={'Add'} callBack={props.handleSubmit}/>
+                                    <FillButton width={'150px'} text={'Add'} isLoading={store.createSliderLoading} callBack={props.handleSubmit}/>
 
                                     {isError && <Error message={errMsg} handleClick={()=>setIsError(false)}/>}
                                 </div>
