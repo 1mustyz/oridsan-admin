@@ -23,7 +23,7 @@ const HomePage = () => {
                 <div className='mt-3 w-[95%] m-auto flex gap-4'>
                     <Card 
                         title={'Total Members'} 
-                        text={store.dashboard.allUsers} 
+                        text={store.dashboard?.allUsers} 
                         bgColor='border-[#E8D268]' 
                         textColor='text-[#E8D268]'
                         image={'./images/dashboard-total-members.png'}
@@ -31,7 +31,7 @@ const HomePage = () => {
 
                     <Card 
                         title={'Approved Members'} 
-                        text={store.dashboard.approvedUsers} 
+                        text={store.dashboard?.approvedUsers} 
                         bgColor='border-[#008000]' 
                         textColor='text-[#008000]'
                         image={'./images/dashboard-approved-members.png'}
@@ -40,7 +40,7 @@ const HomePage = () => {
 
                     <Card 
                         title={'Pending Members'} 
-                        text={store.dashboard.pendingUsers} 
+                        text={store.dashboard?.pendingUsers} 
                         bgColor='border-[#FFA200]' 
                         textColor='text-[#FFA200]'
                         image={'./images/dashboard-pending-members.png'}
@@ -49,7 +49,7 @@ const HomePage = () => {
 
                     <Card 
                         title={'Active Certificate'} 
-                        text={store.dashboard.activeCertificates} 
+                        text={store.dashboard?.activeCertificates} 
                         bgColor='border-[#2086C4]' 
                         textColor='text-[#2086C4]'
                         image={'./images/dashboard-active-members.png'}
@@ -58,7 +58,7 @@ const HomePage = () => {
 
                     <Card 
                         title={'Local Chapters'} 
-                        text={store.dashboard.chapters} 
+                        text={store.dashboard?.chapters} 
                         bgColor='border-[#9B51E0]' 
                         textColor='text-[#9B51E0]'
                         image={'./images/dashboard-total-members.png'}
