@@ -24,3 +24,13 @@ export const createMembership = async (data) => {
  
 }
 
+export const deleteMembership = async (data) => {
+    try {
+        const response = await axios.delete(`${BASE_URI}/membership-category/${data}`, storage.getConfig());
+        return response.data;
+    } catch (error) {
+        throw Error(error)
+    }
+ 
+}
+

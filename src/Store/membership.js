@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getMemberships, createMembership } from '../Network/ServiceClass/Membership';
+import { getMemberships, createMembership, deleteMembership } from '../Network/ServiceClass/Membership';
 
 export const getMembershipsThunk = createAsyncThunk('membership/getMemberships', getMemberships);
 export const createMembershipThunk = createAsyncThunk('membership/createMembership', createMembership);
+export const deleteMembershipThunk = createAsyncThunk('membership/deleteMembership', deleteMembership);
+
 
 
 const initialState = {
   memberships: [],
   loading: false,
-  createMembershipLoading: false
+  createMembershipLoading: false,
+  deleteMembershipLoading: false
+
 }
 
 const MembershipSlice = createSlice({
@@ -35,6 +39,16 @@ const MembershipSlice = createSlice({
      },
      [createMembershipThunk.rejected]: (state) => {
       state.createMembershipLoading = false;
+     },
+
+     [deleteMembershipThunk.pending]: (state) => {
+      state.deleteMembershipLoading = true
+     },
+     [deleteMembershipThunk.fulfilled]: (state) => {
+      state.deleteMembershipLoading = false;
+     },
+     [deleteMembershipThunk.rejected]: (state) => {
+      state.deleteMembershipLoading = false;
      },
   }
 })

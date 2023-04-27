@@ -94,8 +94,8 @@ export default function ViewApplication({open, handleClose, selectedUser}) {
             </div>
 
             <div className='flex gap-10 w-[90%] m-auto mb-6'>
-                <FillButton text={'Approve'} callBack={handleClickOpen}/>
-                <FillButton text={'Reject'} bg='#B90707' hoverBg='#f61616'/>
+                <FillButton text={'Approve'} disable={selectedUser.status === undefined || selectedUser.status !== 'Pending'} callBack={handleClickOpen}/>
+                <FillButton text={'Reject'} disable={selectedUser.status === undefined || selectedUser.status !== 'Pending'} bg='#B90707' hoverBg='#f61616'/>
             </div>
 
        </div>}

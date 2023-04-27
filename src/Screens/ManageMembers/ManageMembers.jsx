@@ -7,9 +7,9 @@ import PaddingLayout from '../../Component/MainLayout/PaddingLayout'
 import {Field, TextAndField, FillButton, Text} from '../../Component/FormUtils/FormUtils'
 import { DataTable } from './DataTable'
 
-const Payment = () => {
+const ManageMembers = () => {
   return (
-    <MainLayout presentLink={'payment'}>
+    <MainLayout presentLink={'manage-members'}>
         <PaddingLayout>
             <div className='bg-[white] p-3 rounded-sm'><DataTable/></div>
 
@@ -19,4 +19,4 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default ManageMembers

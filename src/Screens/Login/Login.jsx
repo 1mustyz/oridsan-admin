@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Formik } from 'formik'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 import Logo from '../../Component/Logo'
 import {Text, TextAndField, Field, FillButton} from '../../Component/FormUtils/FormUtils' 
@@ -24,16 +25,22 @@ const Login = () => {
     setIsLoading(true)
 
     login(value).then(val => {
-
+      const role = val.data.data.role
       setIsLoading(false)
-      const data = {
-        user: val.data.data.personalDetails,
-        token: val.data.token
+      if(role !== undefined && (role.includes('Staff') || role.includes('Admin'))){
+        const data = {
+          user: val.data.data.personalDetails,
+          token: val.data.token
+        }
+  
+        storage.AuthStorage(data)
+  
+        navigate('/home')
+
+      }else{
+        toast.error('You are not allow access!')
       }
 
-      storage.AuthStorage(data)
-
-      navigate('/home')
     }).catch(err => {
       setIsLoading(false)
       setErrorMsg(err.response.data.message)

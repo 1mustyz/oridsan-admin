@@ -8,23 +8,14 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {FaRegEdit} from 'react-icons/fa'
 import { useDispatch,useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 import {CustomIconButton} from '../../Component/FormUtils/FormUtils'
-import {getConferencesThunk} from '../../Store/conference'
+import {getConferencesThunk, deleteConferenceThunk} from '../../Store/conference'
 import AppLoader from '../../Component/AppLoader';
+import DeleteBox from '../../Component/DeleteBox';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0,),
-  createData('Ice cream sandwich', 237, 9.0,),
-  createData('Eclair', 262, 16.0,),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0,),
-];
 
 export const DataTable = () => {
   const dispatch = useDispatch()
@@ -33,10 +24,40 @@ export const DataTable = () => {
 
   useEffect(()=>{
     dispatch(getConferencesThunk())
-  },[dispatch])
+  },[])
+
+  const [open, setOpen] = React.useState(false);
+  const [deleteId, setDeletId] = React.useState('');
+
+  const deleteFunction = () => {
+    dispatch(deleteConferenceThunk(deleteId))
+    .then(()=>{
+      handleClose()
+      toast.success('Conference deleted')
+      dispatch(getConferencesThunk())
+    })
+  }
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
    
   return (
     <TableContainer className='h-[70vh] bg-[white] overflow-y-auto'>
+
+      <DeleteBox open={open}
+       handleClose={handleClose} 
+       title={'Delete A Conference'} 
+       body={'By clicking continue the conference in question will be deleted'}
+       deleteFunction={deleteFunction}
+       loading={store.deleteConferenceLoading}
+       />
       
       <AppLoader loading={store.loading}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -71,8 +92,7 @@ export const DataTable = () => {
                 <TableCellWithBorder text={row.time}/>
 
                 <TableCell className='border-1 w-[155px] border-border-color' component="th" scope="row">
-                  <CustomIconButton Icon={FaRegEdit}/>
-                  <CustomIconButton iconStyle={'text-[red]'} Icon={DeleteIcon}/>
+                  <CustomIconButton iconStyle={'text-[red]'} callBack={()=>{handleClickOpen(); setDeletId(row._id)}} Icon={DeleteIcon}/>
 
                 </TableCell>
                 

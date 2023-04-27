@@ -8,11 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {FaRegEdit} from 'react-icons/fa'
 import { useDispatch,useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 import {CustomIconButton} from '../../Component/FormUtils/FormUtils'
-import { getMembershipsThunk } from '../../Store/membership';
+import { getMembershipsThunk, deleteMembershipThunk } from '../../Store/membership';
 import AppLoader from '../../Component/AppLoader';
+import DeleteBox from '../../Component/DeleteBox';
 
 
 
@@ -24,9 +26,38 @@ export const DataTable = () => {
   useEffect(()=>{
     dispatch(getMembershipsThunk())
   },[])
+
+  const [open, setOpen] = React.useState(false);
+  const [deleteId, setDeletId] = React.useState('');
+
+  const deleteFunction = () => {
+    dispatch(deleteMembershipThunk(deleteId))
+    .then(()=>{
+      handleClose()
+      toast.success('Membership category deleted')
+      dispatch(getMembershipsThunk())
+    })
+  }
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
    
   return (
     <TableContainer className='h-[70vh] bg-[white] overflow-y-auto'>
+
+      <DeleteBox open={open}
+       handleClose={handleClose} 
+       title={'Delete A Membership Category'} 
+       body={'By clicking continue the Category in question will be deleted'}
+       deleteFunction={deleteFunction}
+       loading={store.deleteMembershipLoading}
+       />
       
       <AppLoader loading={store.loading}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,8 +86,7 @@ export const DataTable = () => {
                 <TableCellWithBorder text={row.price}/>
 
                 <TableCell className='border-1 w-[155px] border-border-color' component="th" scope="row">
-                  <CustomIconButton Icon={FaRegEdit}/>
-                  <CustomIconButton iconStyle={'text-[red]'} Icon={DeleteIcon}/>
+                  <CustomIconButton iconStyle={'text-[red]'} callBack={()=>{handleClickOpen(); setDeletId(row._id)}} Icon={DeleteIcon}/>
 
                 </TableCell>
                 

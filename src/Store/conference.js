@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {getConferences, createConference} from '../Network/ServiceClass/Conference'
+import {getConferences, createConference, deleteConference} from '../Network/ServiceClass/Conference'
 
 export const getConferencesThunk = createAsyncThunk('conference/getConferences', getConferences);
 export const createConferenceThunk = createAsyncThunk('conference/createConference', createConference);
+export const deleteConferenceThunk = createAsyncThunk('conference/deleteConference', deleteConference);
+
 
 
 const initialState = {
   conferences: [],
   loading: false,
-  createConferenceLoading: false
+  createConferenceLoading: false,
+  deleteConferenceLoading: false
+
 }
 
 const ConferenceSlice = createSlice({
@@ -35,6 +39,16 @@ const ConferenceSlice = createSlice({
      },
      [createConferenceThunk.rejected]: (state) => {
       state.createConferenceLoading = false;
+     },
+
+     [deleteConferenceThunk.pending]: (state) => {
+      state.deleteConferenceLoading = true
+     },
+     [deleteConferenceThunk.fulfilled]: (state) => {
+      state.deleteConferenceLoading = false;
+     },
+     [deleteConferenceThunk.rejected]: (state) => {
+      state.deleteConferenceLoading = false;
      },
   }
 })

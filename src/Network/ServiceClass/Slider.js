@@ -27,7 +27,7 @@ export const createSlider = async (data) => {
 
 export const deleteSlider = async (data) => {
     try {
-        const response = await axios.delete(`${BASE_URI}/sliders`, data, storage.getConfig());
+        const response = await axios.delete(`${BASE_URI}/sliders/${data}`, storage.getConfig());
         return response.data;
     } catch (error) {
         throw Error(error)

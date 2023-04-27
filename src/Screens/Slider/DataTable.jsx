@@ -7,10 +7,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import {CustomIconButton} from '../../Component/FormUtils/FormUtils'
-import { getSlidersThunk } from '../../Store/slider';
+import { getSlidersThunk, deleteSliderThunk } from '../../Store/slider';
 import AppLoader from '../../Component/AppLoader';
+import DeleteBox from '../../Component/DeleteBox';
 
 export const DataTable = () => {
   const dispatch = useDispatch()
@@ -19,9 +21,40 @@ export const DataTable = () => {
   useEffect(()=>{
     dispatch(getSlidersThunk())
   },[])
+
+
+  const [open, setOpen] = React.useState(false);
+  const [deleteId, setDeletId] = React.useState('');
+
+  const deleteFunction = () => {
+    dispatch(deleteSliderThunk(deleteId))
+    .then(()=>{
+      handleClose()
+      toast.success('Slider deleted')
+      dispatch(getSlidersThunk())
+    })
+  }
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
    
   return (
     <TableContainer className='h-[70vh] bg-[white] overflow-y-auto'>
+
+      <DeleteBox open={open}
+       handleClose={handleClose} 
+       title={'Delete A Slider'} 
+       body={'By clicking continue the slider in question will be deleted'}
+       deleteFunction={deleteFunction}
+       loading={store.deleteSliderLoading}
+       />
 
       <AppLoader loading={store.loading}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -51,7 +84,7 @@ export const DataTable = () => {
                 </TableCell>
                 
                 <TableCell className='border-1 border-border-color' component="th" scope="row">
-                  <CustomIconButton iconStyle={'text-[red]'} Icon={DeleteIcon}/>
+                  <CustomIconButton iconStyle={'text-[red]'} callBack={()=>{handleClickOpen(); setDeletId(row._id)}} Icon={DeleteIcon}/>
                 </TableCell>
                 
               </TableRow>

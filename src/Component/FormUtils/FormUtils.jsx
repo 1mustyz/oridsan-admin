@@ -63,7 +63,6 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
     return (
         <FormControl fullWidth>
              {callback !== undefined &&<Select
-               {...props} {...field}
                IconComponent = {ExpandMoreIcon}
                disabled={disable}
                size={size}
@@ -71,12 +70,11 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
                labelId="demo-simple-select-label"
                id="demo-simple-select"
                sx={{width: width, height: height,}}
-               className={(meta.error && meta.touched) ? classes.root : ''}
                 onChange={callback}
                 >
                 <MenuItem value={'none'} disabled>{placeholder}</MenuItem>
 
-                {/* {list !== undefined  && list.map(val => <MenuItem value={val.id} >{val.name}</MenuItem>)} */}
+                {list !== undefined  && list.map(val => <MenuItem value={val.id} >{val.name}</MenuItem>)}
 
               </Select>}
             {callback === undefined &&<Select
@@ -96,6 +94,30 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
             </Select>}
             {(meta.error) && (meta.touched) &&  
             <Typography sx={{fontSize: '10px', color: 'red', p:0}}>{meta.error}</Typography>}
+        </FormControl>
+    )
+  }
+
+  export  const FieldSelectWithOutFormik = ({list, value, disable=false, callback, size='small', height='35px', width='330px', placeholder='Choose'}) => {
+
+    return (
+        <FormControl fullWidth>
+             {callback !== undefined &&<Select
+               IconComponent = {ExpandMoreIcon}
+               disabled={disable}
+               size={size}
+               value={value}
+               labelId="demo-simple-select-label"
+               id="demo-simple-select"
+               sx={{width: width, height: height,}}
+                onChange={callback}
+                >
+                <MenuItem value={'none'} disabled>{placeholder}</MenuItem>
+
+                {list !== undefined  && list.map(val => <MenuItem value={val.id} >{val.name}</MenuItem>)}
+
+              </Select>}
+           
         </FormControl>
     )
   }

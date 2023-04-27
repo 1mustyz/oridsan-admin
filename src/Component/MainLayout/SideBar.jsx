@@ -8,7 +8,7 @@ import {TbCategory} from 'react-icons/tb'
 
 import PeopleIcon from '@mui/icons-material/People';
 import {SlOrganization} from 'react-icons/sl'
-import PaymentsIcon from '@mui/icons-material/Payments';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useNavigate } from 'react-router';
 
 const SideBar = ({open,presentLink}) => {
@@ -43,10 +43,10 @@ const SideBar = ({open,presentLink}) => {
       />
 
       <CustomList 
-        text={'Payment'} open={open} 
-        active={presentLink === 'payment' ? true : false}
-        handleClick={() => { navigate("/payment") }}
-        Icon={PaymentsIcon}
+        text={'Manage Members'} open={open} 
+        active={presentLink === 'manage-members' ? true : false}
+        handleClick={() => { navigate("/manage-members") }}
+        Icon={ManageAccountsIcon}
       />
 
       <CustomList 

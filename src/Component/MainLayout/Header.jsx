@@ -1,9 +1,21 @@
 import React from 'react'
 import Logo from '../Logo'
-import {AiOutlineBell} from 'react-icons/ai'
-import {IoPersonCircleSharp} from 'react-icons/io5'
+import {AiOutlineLogout} from 'react-icons/ai'
+import { CustomIconButton } from '../FormUtils/FormUtils'
+import { Storage } from '../../Network/StorageClass/StorageClass'
+import { useNavigate } from 'react-router'
 
+
+const storage = new Storage()
 const Header = ({open}) => {
+  const navigate = useNavigate()
+
+  const handleCallBack =() => {
+    storage.clearStorage()
+    navigate('/')
+
+  }
+
   const date = new Date().toDateString().split(' ').splice(0,4).join(' ')
   return (
     <div className='flex justify-between items-center w-[100%]'>
@@ -11,8 +23,7 @@ const Header = ({open}) => {
         <p>{date}</p>
 
         <div className='flex gap-4 text-[24px]'>
-            <AiOutlineBell />
-            <IoPersonCircleSharp />
+          <CustomIconButton Icon={AiOutlineLogout} callBack={handleCallBack}/>
         </div>
     </div>
   )

@@ -14,16 +14,14 @@ const ViewStaff = () => {
             <div className='flex flex-col p-6 gap-3 bg-[white]'>
                 <p>View Staff</p>
 
-                <CustomSearch searchValue={searchValue} handleChange={(e)=>setSearchValue(e.target.value)}/>
-
                 <DataTable/>
 
-                <div className='flex self-end'>
+                {/* <div className='flex self-end'>
                     <OutlinedButton text={'prev'}/>
                     <p className='bg-primary text-[white] px-5 py-1 '>1</p>
                     <OutlinedButton text={'next'}/>
 
-                </div>
+                </div> */}
 
             </div>
 

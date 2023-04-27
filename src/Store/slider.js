@@ -3,12 +3,16 @@ import { getSliders,createSlider,deleteSlider } from '../Network/ServiceClass/Sl
 
 export const getSlidersThunk = createAsyncThunk('slider/getSliders', getSliders);
 export const createSliderThunk = createAsyncThunk('slider/createSlider', createSlider);
+export const deleteSliderThunk = createAsyncThunk('slider/deleteSlider', deleteSlider);
+
 
 
 const initialState = {
   sliders: [],
   loading: false,
-  createSliderLoading: false
+  createSliderLoading: false,
+  deleteSliderLoading: false
+
 }
 
 const SliderSlice = createSlice({
@@ -35,6 +39,16 @@ const SliderSlice = createSlice({
      },
      [createSliderThunk.rejected]: (state) => {
       state.createSliderLoading = false;
+     },
+
+     [deleteSliderThunk.pending]: (state) => {
+      state.deleteSliderLoading = true
+     },
+     [deleteSliderThunk.fulfilled]: (state) => {
+      state.deleteSliderLoading = false;
+     },
+     [deleteSliderThunk.rejected]: (state) => {
+      state.deleteSliderLoading = false;
      },
   }
 })

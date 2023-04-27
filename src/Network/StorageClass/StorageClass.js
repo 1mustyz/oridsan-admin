@@ -8,7 +8,9 @@ export class Storage {
 
 
     clearStorage() {
-        localStorage.clearStorage();
+        localStorage.removeItem("authtoken"); 
+        localStorage.removeItem("user"); 
+
     }
 
     getUserDetails() {

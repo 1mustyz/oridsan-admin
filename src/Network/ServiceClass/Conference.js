@@ -24,3 +24,12 @@ export const createConference = async (data) => {
  
 }
 
+export const deleteConference = async (data) => {
+    try {
+        const response = await axios.delete(`${BASE_URI}/events/${data}`, storage.getConfig());
+        return response.data;
+    } catch (error) {
+        throw Error(error)
+    }
+ 
+}
