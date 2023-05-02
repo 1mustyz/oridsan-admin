@@ -26,6 +26,14 @@ export  const seminarSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
   })
 
+  export  const presidentSchema = Yup.object().shape({
+    message: Yup.string().required("Message is required"),
+    name: Yup.string().required("Name is required"),
+    from: Yup.string().required("From date is required"),
+    to: Yup.string().required("To date is required"),
+
+  })
+
   export  const chapterSchema = Yup.object().shape({
     chapterName: Yup.string().required("Chapter Name is required"),
     address: Yup.string().required("Address is required"),

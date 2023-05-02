@@ -11,12 +11,12 @@ import {Field, TextAndField, FillButton, Text} from '../../Component/FormUtils/F
 import { DataTable } from './DataTable'
 import { uploadFile } from '../../Network/ServiceClass/File'
 import { sliderSchema } from '../../Component/validationSchema'
-import { createSliderThunk } from '../../Store/slider'
+import { createNewsThunk } from '../../Store/news'
 import Error from '../../Component/Errors/Error'
 
-const Slider = () => {
+const News = () => {
     const dispatch = useDispatch()
-    const store = useSelector((state) => state.slider);
+    const store = useSelector((state) => state.news);
 
     const [photo, setPhoto] = useState(null)
     const [publicId, setPublicId] = useState(null)
@@ -56,20 +56,20 @@ const Slider = () => {
             setIsError(true)
             setErrMsg('You have to select an image')
         }else{
-            dispatch(createSliderThunk(data))
+            dispatch(createNewsThunk(data))
             .then(()=>{
                 actions.resetForm()
-                toast.success('Home slider created')
+                toast.success('news created')
             })
         }
     }
   return (
-    <MainLayout presentLink={'slider'}>
+    <MainLayout presentLink={'news'}>
         <PaddingLayout>
             <div className='flex flex-col gap-3'>
 
                 <div className='p-4 rounded-sm flex flex-col gap-5 bg-[white]'>
-                    <p className='text-[18px]'>Add Home page slider</p>
+                    <p className='text-[18px]'>Add News</p>
 
                     <Formik 
                     initialValues={{
@@ -100,7 +100,7 @@ const Slider = () => {
                                 </div>
                                 <Field size='small' multiline={true} maxRows={4} conWidth='940px' name='description' placeholder='Description'/>
                                 <div className='flex gap-2'>
-                                    <FillButton width={'150px'} text={'Add'} isLoading={store.createSliderLoading} callBack={props.handleSubmit}/>
+                                    <FillButton width={'150px'} text={'Add'} isLoading={store.createNewsLoading} callBack={props.handleSubmit}/>
 
                                     {isError && <Error message={errMsg} handleClick={()=>setIsError(false)}/>}
                                 </div>
@@ -122,4 +122,4 @@ const Slider = () => {
   )
 }
 
-export default Slider
+export default News

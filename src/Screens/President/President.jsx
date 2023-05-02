@@ -10,13 +10,13 @@ import PaddingLayout from '../../Component/MainLayout/PaddingLayout'
 import {Field, TextAndField, FillButton, Text} from '../../Component/FormUtils/FormUtils'
 import { DataTable } from './DataTable'
 import { uploadFile } from '../../Network/ServiceClass/File'
-import { sliderSchema } from '../../Component/validationSchema'
-import { createSliderThunk } from '../../Store/slider'
+import { presidentSchema } from '../../Component/validationSchema'
+import { createPresidentThunk } from '../../Store/president'
 import Error from '../../Component/Errors/Error'
 
-const Slider = () => {
+const President = () => {
     const dispatch = useDispatch()
-    const store = useSelector((state) => state.slider);
+    const store = useSelector((state) => state.president);
 
     const [photo, setPhoto] = useState(null)
     const [publicId, setPublicId] = useState(null)
@@ -44,8 +44,8 @@ const Slider = () => {
 
     const handleSubmit = (values, actions) => {
         const data = {
-            description: values.description,
-            title: values.title,
+            message: values.message,
+            name: values.name,
             photo: {
                 publicID: publicId,
                 secureUrl: photo
@@ -56,36 +56,40 @@ const Slider = () => {
             setIsError(true)
             setErrMsg('You have to select an image')
         }else{
-            dispatch(createSliderThunk(data))
+            dispatch(createPresidentThunk(data))
             .then(()=>{
                 actions.resetForm()
-                toast.success('Home slider created')
+                toast.success('president created')
             })
         }
     }
   return (
-    <MainLayout presentLink={'slider'}>
+    <MainLayout presentLink={'president'}>
         <PaddingLayout>
             <div className='flex flex-col gap-3'>
 
                 <div className='p-4 rounded-sm flex flex-col gap-5 bg-[white]'>
-                    <p className='text-[18px]'>Add Home page slider</p>
+                    <p className='text-[18px]'>Add President</p>
 
                     <Formik 
                     initialValues={{
-                        description: '',
-                        title: '',
+                        message: '',
+                        name: '',
+                        from: '',
+                        to: ''
                     }}
-                    validationSchema={sliderSchema}
+                    validationSchema={presidentSchema}
                     onSubmit={(values,actions)=> handleSubmit(values,actions)}>
                         {props => (
                             <div className='flex flex-col gap-4'>
 
                                 <div className='flex gap-10'>
                                     <TextAndField>
-                                        <Text text={'Title'}/>
-                                        <Field size='small' conWidth='500px'  name='title' placeholder='Enter Header Title'/>
+                                        <Text text={'Name'}/>
+                                        <Field size='small' conWidth='500px'  name='name' placeholder='Enter Name'/>
                                     </TextAndField>
+
+                                    
 
                                     <div className='flex items-center gap-2'>
                                         <TextAndField>
@@ -98,9 +102,23 @@ const Slider = () => {
 
                                    
                                 </div>
-                                <Field size='small' multiline={true} maxRows={4} conWidth='940px' name='description' placeholder='Description'/>
+                                <Field size='small' multiline={true} maxRows={4} conWidth='940px' name='message' placeholder='Message'/>
+
+                                <div className='flex flex-row gap-3'>
+
+                                    <TextAndField>
+                                        <Text text={'From'}/>
+                                        <Field size='small' type={'date'} conWidth='150px'  name='from' />
+                                    </TextAndField>
+
+                                    <TextAndField>
+                                        <Text text={'To'}/>
+                                        <Field size='small' type={'date'} conWidth='150px'  name='to' />
+                                    </TextAndField>
+                                </div>
+
                                 <div className='flex gap-2'>
-                                    <FillButton width={'150px'} text={'Add'} isLoading={store.createSliderLoading} callBack={props.handleSubmit}/>
+                                    <FillButton width={'150px'} text={'Add'} isLoading={store.createPresidentLoading} callBack={props.handleSubmit}/>
 
                                     {isError && <Error message={errMsg} handleClick={()=>setIsError(false)}/>}
                                 </div>
@@ -122,4 +140,4 @@ const Slider = () => {
   )
 }
 
-export default Slider
+export default President

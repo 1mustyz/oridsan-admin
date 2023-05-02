@@ -5,6 +5,8 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import {TfiLayoutSlider} from 'react-icons/tfi'
 import {GiVideoConference} from 'react-icons/gi'
 import {TbCategory} from 'react-icons/tb'
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import CoPresentIcon from '@mui/icons-material/CoPresent';
 
 import PeopleIcon from '@mui/icons-material/People';
 import {SlOrganization} from 'react-icons/sl'
@@ -68,6 +70,20 @@ const SideBar = ({open,presentLink}) => {
         active={presentLink === 'membership' ? true : false}
         handleClick={() => { navigate("/category") }}
         Icon={TbCategory}
+      />
+
+      <CustomList 
+        text={'News'} open={open} 
+        active={presentLink === 'news' ? true : false}
+        handleClick={() => { navigate("/news") }}
+        Icon={NewspaperIcon}
+      />
+
+      <CustomList 
+        text={'President'} open={open} 
+        active={presentLink === 'president' ? true : false}
+        handleClick={() => { navigate("/president") }}
+        Icon={CoPresentIcon}
       />
 
     </List>

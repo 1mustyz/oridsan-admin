@@ -6,6 +6,8 @@ import Slider from "./slider";
 import Staff from "./staff";
 import Chapter from "./chapter";
 import Members from "./members";
+import News from "./news";
+import President from "./president";
 
 export const Store = configureStore({
     reducer:{
@@ -14,6 +16,8 @@ export const Store = configureStore({
         slider: Slider,
         staff: Staff,
         chapter: Chapter,
-        member: Members
+        member: Members,
+        news: News,
+        president: President
     }
 })

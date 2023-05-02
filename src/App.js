@@ -10,6 +10,8 @@ import Login from './Screens/Login/Login';
 import Category from './Screens/Category/Category';
 import AppToast from './Component/Toaster/AppToast'
 import ManageMembers from './Screens/ManageMembers/ManageMembers';
+import News from './Screens/News/News';
+import President from './Screens/President/President';
 
 
 function App() {
@@ -27,7 +29,8 @@ function App() {
           <Route path='/seminar' element={<Seminars/>} />
           <Route path='/' element={<Login/>} />
           <Route path='/category' element={<Category />} />
-
+          <Route path='/news' element={<News />} />
+          <Route path='/president' element={<President />} />
         
         </Routes>
       </BrowserRouter>
