@@ -84,8 +84,13 @@ const Category = () => {
                                         <FieldSelect
                                             multiple={true}
                                             list={[
-                                                {id:'Undergraduate', name:'Undergraduate'},
-                                                {id: 'Postgraduate', name: 'Postgraduate'},
+                                                {id:'Admission Letter', name:'Admission Letter'},
+                                                {id: 'Degree/HND certificate', name: 'Degree/HND certificate'},
+                                                {id: 'Msc Certificate', name: 'Msc Certificate'},
+                                                {id: 'Evidence of research work', name: 'Evidence of research work'},
+                                                {id: 'IMPD proof atleast two', name: 'IMPD prof atleast two'},
+                                                {id: 'Research/experience works', name: 'Research/experience works'},
+
                                             ]} value={[]}
                                             //   height='55px'
                                             width={'200px'} 
