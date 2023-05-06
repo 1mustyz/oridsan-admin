@@ -46,8 +46,9 @@ const AddStaff = () => {
                     lastName: '',
                     email: '',
                     role: 'Admin',
+                    title: '',
                     password: '',
-                    confirmPassword: ''
+                    confirmPassword: '',
                 }}
                 validationSchema={staffSchema}
                 onSubmit={(values, actions)=> handleSubmit(values, actions)}>
@@ -93,6 +94,14 @@ const AddStaff = () => {
 
 
                             </FormFlexRow>
+
+                            <FormFlexRow>
+
+                                <TextAndField space={0.5}>
+                                    <Text text={'Title'}/>
+                                    <Field size='small' conWidth={'400px'} name='title' placeholder='Title'/>
+                                </TextAndField>
+
                                 <TextAndField space={0.5}>
                                     <Text text={'Select Role'}/>
                                     <FieldSelect
@@ -105,6 +114,8 @@ const AddStaff = () => {
                                     placeholder='Select a role' 
                                     name='role'/>
                                 </TextAndField>
+                            </FormFlexRow>
+
                             <div className='flex gap-3 self-end'>
                                 {isError && <Error message={errorMsg} handleClick={()=> setIsError(false)}/>}
                                 <FillButton isLoading={store.createStaffLoading} text={'Add staff'} callBack={props.handleSubmit}/>

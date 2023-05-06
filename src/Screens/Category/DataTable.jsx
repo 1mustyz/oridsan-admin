@@ -66,6 +66,8 @@ export const DataTable = () => {
               <TableCellWithBorder text={'S/N'}/>
               <TableCellWithBorder text={'Membership'}/>
               <TableCellWithBorder text={'Desc'}/>
+              <TableCellWithBorder text={'Documents'}/>
+
               <TableCellWithBorder text={'Price'}/>
              
               <TableCellWithBorder text={'Action'}/>
@@ -83,6 +85,8 @@ export const DataTable = () => {
                   {row.membershipCat}
                 </TableCell>
                 <TableCellWithBorder text={row.description}/>
+                <TableCellWithBorder text={row?.documentTypes.join(', ')}/>
+
                 <TableCellWithBorder text={row.price}/>
 
                 <TableCell className='border-1 w-[155px] border-border-color' component="th" scope="row">

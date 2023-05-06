@@ -119,7 +119,7 @@ export const DataTable = () => {
               <TableCellWithBorder text={'S/N'}/>
               <TableCellWithBorder text={'Name'}/>
               <TableCellWithBorder text={'Email'}/>
-              <TableCellWithBorder text={'Phone Number'}/>
+              <TableCellWithBorder text={'Title'}/>
               <TableCellWithBorder text={'Role'}/>
               <TableCellWithBorder text={'Make Admin'}/>
               <TableCellWithBorder text={'Action'}/>
@@ -137,7 +137,7 @@ export const DataTable = () => {
                   {`${row.personalDetails.firstName} ${row.personalDetails.lastName}`}
                 </TableCell>
                 <TableCellWithBorder text={row.personalDetails.email}/>
-                <TableCellWithBorder text={'phone number'}/>
+                <TableCellWithBorder text={row.personalDetails?.title}/>
                 <TableCellWithBorder text={row.role.join(',')}/>
                 <TableCell className='border-1 border-border-color' component="th" scope="row">
                   <Switch checked={row.role.includes('Admin')} onChange={()=>handleChangeRole(row._id, row.role.includes('Admin'))}/>

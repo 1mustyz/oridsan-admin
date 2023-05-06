@@ -12,9 +12,14 @@ import PeopleIcon from '@mui/icons-material/People';
 import {SlOrganization} from 'react-icons/sl'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useNavigate } from 'react-router';
+import { Storage } from '../../Network/StorageClass/StorageClass';
 
 const SideBar = ({open,presentLink}) => {
   const navigate = useNavigate()
+  const storage = new Storage()
+
+  const user = storage.getUserDetails()
+  const role = user.role
 
   return (
     <List>
@@ -23,19 +28,19 @@ const SideBar = ({open,presentLink}) => {
         active={presentLink === 'dashboard' ? true : false}
         handleClick={() => { navigate("/home") }}
       />
-      <CustomList 
+      {role.includes('Admin') && <CustomList 
         text={'Add Staff'} open={open} 
         active={presentLink === 'add-staff' ? true : false}
         handleClick={() => { navigate("/add-staff") }}
         Icon={PersonAddAlt1Icon}
-      />
+      />}
 
-      <CustomList 
+      {role.includes('Admin') && <CustomList 
         text={'View Staff'} open={open} 
         active={presentLink === 'view-staff' ? true : false}
         handleClick={() => { navigate("/view-staff") }}
         Icon={PeopleIcon}
-      />
+      />}
 
       <CustomList 
         text={'View Chapters'} open={open} 
@@ -44,12 +49,12 @@ const SideBar = ({open,presentLink}) => {
         Icon={SlOrganization}
       />
 
-      <CustomList 
+      {role.includes('Admin') &&<CustomList 
         text={'Manage Members'} open={open} 
         active={presentLink === 'manage-members' ? true : false}
         handleClick={() => { navigate("/manage-members") }}
         Icon={ManageAccountsIcon}
-      />
+      />}
 
       <CustomList 
         text={'Home Slider'} open={open} 
@@ -65,26 +70,26 @@ const SideBar = ({open,presentLink}) => {
         Icon={GiVideoConference}
       />
 
-      <CustomList 
+      {role.includes('Admin') &&<CustomList 
         text={'Membership Category'} open={open} 
         active={presentLink === 'membership' ? true : false}
         handleClick={() => { navigate("/category") }}
         Icon={TbCategory}
-      />
+      />}
 
-      <CustomList 
+      {role.includes('Admin') &&<CustomList 
         text={'News'} open={open} 
         active={presentLink === 'news' ? true : false}
         handleClick={() => { navigate("/news") }}
         Icon={NewspaperIcon}
-      />
+      />}
 
-      <CustomList 
+      {role.includes('Admin') &&<CustomList 
         text={'President'} open={open} 
         active={presentLink === 'president' ? true : false}
         handleClick={() => { navigate("/president") }}
         Icon={CoPresentIcon}
-      />
+      />}
 
     </List>
   )

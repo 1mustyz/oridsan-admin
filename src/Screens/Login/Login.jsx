@@ -29,8 +29,8 @@ const Login = () => {
       setIsLoading(false)
       if(role !== undefined && (role.includes('Staff') || role.includes('Admin'))){
         const data = {
-          user: val.data.data.personalDetails,
-          token: val.data.token
+          user: {role ,...val.data.data.personalDetails},
+          token: val.data.token,
         }
   
         storage.AuthStorage(data)

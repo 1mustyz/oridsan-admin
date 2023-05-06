@@ -54,7 +54,7 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
     )
   }
 
-  export  const FieldSelect = ({list, clickFunction=false, value, disable=false, callback, size='small', height='35px', width='330px', placeholder='Choose',...props}) => {
+  export  const FieldSelect = ({list, multiple=false, clickFunction=false, value, disable=false, callback, size='small', height='35px', width='330px', placeholder='Choose',...props}) => {
     // console.log(list)
     const classes = useStyles();
     const [field, meta] = useField(props)
@@ -63,6 +63,7 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
     return (
         <FormControl fullWidth>
              {callback !== undefined &&<Select
+                multiple={multiple}
                IconComponent = {ExpandMoreIcon}
                disabled={disable}
                size={size}
@@ -78,6 +79,7 @@ export const Field = ({type, multiline, maxRows, width, conWidth='300px',  varia
 
               </Select>}
             {callback === undefined &&<Select
+                multiple={multiple}
                 {...props} {...field}
                 IconComponent = {ExpandMoreIcon}
                 disabled={disable}

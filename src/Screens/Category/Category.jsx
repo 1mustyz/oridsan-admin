@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 import MainLayout from '../../Component/MainLayout/MainLayout'
 import PaddingLayout from '../../Component/MainLayout/PaddingLayout'
-import {Field, TextAndField, FillButton, Text} from '../../Component/FormUtils/FormUtils'
+import {Field, TextAndField, FillButton, Text, FieldSelect} from '../../Component/FormUtils/FormUtils'
 import { DataTable } from './DataTable'
 import { membershipSchema } from '../../Component/validationSchema'
 import { createMembershipThunk } from '../../Store/membership';
@@ -23,7 +23,8 @@ const Category = () => {
         const data = {
             description: value.description,
             membershipCat: value.membership,
-            price: value.price
+            price: value.price,
+            documentTypes: value.documentTypes
         }
        
         dispatch(createMembershipThunk(data))
@@ -54,6 +55,7 @@ const Category = () => {
                         description: '',
                         membership: '',
                         price: '',
+                        documentTypes: []
                     }}
                     validationSchema={membershipSchema}
                     onSubmit={(value,action)=> handleSubmit(value,action)}>
@@ -75,6 +77,20 @@ const Category = () => {
                                     <TextAndField>
                                         <Text text={'Set Price'}/>
                                         <Field size='small' conWidth='200px' type={'number'} name='price' placeholder='Enter Price'/>
+                                    </TextAndField>
+
+                                    <TextAndField>
+                                        <Text text={'Select Document'}/>
+                                        <FieldSelect
+                                            multiple={true}
+                                            list={[
+                                                {id:'Undergraduate', name:'Undergraduate'},
+                                                {id: 'Postgraduate', name: 'Postgraduate'},
+                                            ]} value={[]}
+                                            //   height='55px'
+                                            width={'200px'} 
+                                            placeholder='Select Documents' 
+                                            name='documentTypes'/>
                                     </TextAndField>
                                 </div>
                                 <FillButton width={'150px'} isLoading={store.createMembershipLoading} text={'Add Membership'} callBack={props.handleSubmit}/>

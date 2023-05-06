@@ -19,6 +19,7 @@ export  const seminarSchema = Yup.object().shape({
     description: Yup.string().required("Description is required"),
     membership: Yup.string().required("Membership is required"),
     price: Yup.number().required("Price is required"),
+    documentTypes: Yup.array().required("You have to select a document")
   })  
   
   export  const sliderSchema = Yup.object().shape({
@@ -44,6 +45,7 @@ export  const seminarSchema = Yup.object().shape({
   export  const staffSchema = Yup.object().shape({
     firstName: Yup.string().min(3).required("First Name is required"),
     lastName: Yup.string().min(3).required("Last Name is required"),
+    title: Yup.string().min(2).required("Title is required"),
     email: Yup.string().email().required("Email is required"),
     role: Yup.string().required("Role is required"),
     password: Yup.string().min(6).required("Password is required"),
